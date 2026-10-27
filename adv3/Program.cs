@@ -57,6 +57,43 @@
                 Console.WriteLine(gradeStr);
             }
             #endregion
+
+            #region  Browser History (Undo)
+            // Create a Stack<string> for browser history and Push 5 URLs: "google.com", "github.com", "stackoverflow.com", "youtube.com", "claude.ai"
+            Stack<string> browserhistory = new Stack<string>();
+            browserhistory.Push("google.com");
+            browserhistory.Push("github.com");
+            browserhistory.Push("stackoverflow.com");
+            browserhistory.Push("youtube.com");
+            browserhistory.Push("claude.ai");
+
+            //Use Peek to see the current page (top of stack)
+            Console.WriteLine($"Current Page: {browserhistory.Peek()}");
+
+            //Press "back" 3 times using Pop — print each page you leave
+            string leftPage1 = browserhistory.Pop();
+            Console.WriteLine($"Left page: {leftPage1}");
+
+            string leftPage2 = browserhistory.Pop();
+            Console.WriteLine($"Left page: {leftPage2}");
+
+            string leftPage3 = browserhistory.Pop();
+            Console.WriteLine($"Left page: {leftPage3}");
+
+            //Print the current page after going back
+            Console.WriteLine($"Current Page after going back: {browserhistory.Peek()}");
+
+            //Try TryPop on an empty stack — what happens?
+            browserhistory.Clear();
+            if (browserhistory.TryPop(out string poppedPage))
+            {
+                Console.WriteLine($"Popped page: {poppedPage}");
+            }
+            else
+            {
+                Console.WriteLine("Stack is empty. Cannot pop.");
+            }
+            #endregion
         }
     }
 }
