@@ -1,4 +1,7 @@
-﻿namespace adv3
+﻿using System.Xml.Linq;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+
+namespace adv3
 {
     internal class Program
     {
@@ -104,6 +107,55 @@
 
             #endregion
 
+            #region Phone Book
+            // Create a Collection  with 4 contacts (name → phone number)
+            Dictionary<string, string> phoneBook = new Dictionary<string, string>();
+
+            phoneBook.Add("nada", "123456789");
+            phoneBook.Add("sara", "2345678901");
+            phoneBook.Add("serag", "3456789012");
+            phoneBook.Add("mona", "4567890123");
+
+            //Add a new contact using [] syntax (add or update)
+            phoneBook["walaa"] = "2099887766";
+
+            //Try adding a duplicate using .Add() — catch the exception and print the error
+            try
+            {
+                phoneBook.Add("nada", "01111111111");
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine($"Error caught: {ex.Message}");
+            }
+
+            //Try adding a duplicate using .TryAdd() — print whether it succeeded
+            bool isAdded = phoneBook.TryAdd("sara", "01222222222");
+            Console.WriteLine($"Did TryAdd succeed for 'Sara'? {isAdded}");
+
+            //Search for a contact that doesn’t exist
+            if (phoneBook.TryGetValue("Omar", out string phoneNumber))
+            {
+                Console.WriteLine($"Found: {phoneNumber}");
+            }
+            else
+            {
+                Console.WriteLine("Contact 'Omar' not found.");
+            }
+
+            //Get a contact with a fallback of "Not Found"
+            string searchedContact = phoneBook.TryGetValue("Noura", out string foundNum) ? foundNum : "Not Found";
+            Console.WriteLine($"Search result for 'Noura': {searchedContact}");
+
+            //Print all Keys on one line, then all Values on another line
+            Console.WriteLine("\nPhone Book Keys (Names)");
+            Console.WriteLine(string.Join(", ", phoneBook.Keys));
+
+            Console.WriteLine("Phone Book Values (Numbers)");
+            Console.WriteLine(string.Join(", ", phoneBook.Values));
+
+
+            #endregion
 
             #region  Browser History (Undo)
             // Create a Stack<string> for browser history and Push 5 URLs: "google.com", "github.com", "stackoverflow.com", "youtube.com", "claude.ai"
