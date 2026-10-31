@@ -157,6 +157,49 @@ namespace adv3
 
             #endregion
 
+            #region Unique Email Validator
+            // Create a HashSet<string> with a case-insensitive comparer: new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+            HashSet<string> emails = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+            //Add these emails: "ahmed@test.com", "AHMED@test.com", "sara@test.com", "Sara@Test.Com"
+            emails.Add("nada@test.com");
+            emails.Add("NADA@test.com");
+            emails.Add("sara@test.com");
+            emails.Add("Sara@Test.Com");
+
+            //Print Count — how many are actually stored? Explain why.
+            Console.WriteLine($"Count of unique emails: {emails.Count}");
+
+            //Create two sets: Set A = {1,2,3,4,5} and Set B = {4,5,6,7,8}
+            HashSet<int> setA = new HashSet<int> { 1, 2, 3, 4, 5 };
+            HashSet<int> setB = new HashSet<int> { 4, 5, 6, 7, 8 };
+
+            //Print the result of: UnionWith, IntersectWith, ExceptWith
+
+            // UnionWith
+            HashSet<int> unionResult = new HashSet<int>(setA);
+            unionResult.UnionWith(setB);
+            Console.WriteLine($"UnionWith: {string.Join(", ", unionResult)}");
+
+            // IntersectWith 
+            HashSet<int> intersectResult = new HashSet<int>(setA);
+            intersectResult.IntersectWith(setB);
+            Console.WriteLine($"IntersectWith: {string.Join(", ", intersectResult)}");
+
+            // ExceptWith 
+            HashSet<int> exceptResult = new HashSet<int>(setA);
+            exceptResult.ExceptWith(setB);
+            Console.WriteLine($"ExceptWith (Set A - Set B): {string.Join(", ", exceptResult)}");
+
+            // Use IsSubsetOf to check if {1,2} is a subset of Set A
+
+            HashSet<int> subSet = new HashSet<int> { 1, 2 };
+            bool isSubset = subSet.IsSubsetOf(setA);
+            Console.WriteLine($"Is {{1,2}} a subset of Set A? {isSubset}");
+
+            #endregion
+
+
             #region  Browser History (Undo)
             // Create a Stack<string> for browser history and Push 5 URLs: "google.com", "github.com", "stackoverflow.com", "youtube.com", "claude.ai"
             Stack<string> browserhistory = new Stack<string>();
