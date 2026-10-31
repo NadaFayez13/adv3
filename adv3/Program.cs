@@ -199,6 +199,40 @@ namespace adv3
 
             #endregion
 
+            #region Print Queue Simulator
+            // Create a Queue<string> and enqueue 5 documents: "Report.pdf", "Invoice.pdf", "Letter.docx", "Resume.pdf", "Photo.jpg"
+            Queue<string> printQueue = new Queue<string>();
+            printQueue.Enqueue("Report.pdf");
+            printQueue.Enqueue("Invoice.pdf");
+            printQueue.Enqueue("Letter.docx");
+            printQueue.Enqueue("Resume.pdf");
+            printQueue.Enqueue("Photo.jpg");
+
+            //Print the queue contents and Count
+            Console.WriteLine("--- Print Queue Contents ---");
+            foreach (string doc in printQueue)
+            {
+                Console.WriteLine(doc);
+            }
+            Console.WriteLine($"Total Documents in Queue (Count): {printQueue.Count}");
+
+            //Use Peek to see which document will print next (without removing)
+            Console.WriteLine($"Next document to print (Peek): {printQueue.Peek()}");
+
+            //Process the queue: Dequeue each document and print "Printing: [name]"
+            Console.WriteLine("\n--- Processing Print Queue ---");
+            while (printQueue.Count > 0)
+            {
+                string currentDoc = printQueue.Dequeue();
+                Console.WriteLine($"Printing: {currentDoc}");
+            }
+
+            //Try TryDequeue on the now-empty queue — what happens?
+            bool isDequeued = printQueue.TryDequeue(out string dequeuedDoc);
+            Console.WriteLine($"\nDid TryDequeue succeed on empty queue? {isDequeued}");
+            Console.WriteLine($"Dequeued document: {dequeuedDoc ?? "Queue is empty"}");
+
+            #endregion
 
             #region  Browser History (Undo)
             // Create a Stack<string> for browser history and Push 5 URLs: "google.com", "github.com", "stackoverflow.com", "youtube.com", "claude.ai"
