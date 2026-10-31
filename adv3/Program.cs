@@ -58,6 +58,53 @@
             }
             #endregion
 
+            #region Leaderboard
+            //Create a leaderboard that automatically sorts players by score
+            SortedDictionary<int, string> leaderboard = new SortedDictionary<int, string>();
+
+            //Add: 500="Ahmed", 200="Sara", 800="Ali", 350="Mona"
+            leaderboard.Add(500, "Ahmed");
+            leaderboard.Add(200, "Sara");
+            leaderboard.Add(800, "Ali");
+            leaderboard.Add(350, "Mona");
+
+            // Print all entries (they should be sorted by score automatically)
+            Console.WriteLine("Leaderboard:");
+            foreach (KeyValuePair<int, string> player in leaderboard)
+            {
+                Console.WriteLine($"Score: {player.Key}, Player: {player.Value}");
+            }
+
+            //Access the first key and first value 
+            var firstEntry = leaderboard.First();
+            Console.WriteLine($"\nFirst Entry -> Score: {firstEntry.Key}, Player: {firstEntry.Value}");
+
+            //Check if score 500 exists
+            bool hasScore500 = leaderboard.ContainsKey(500);
+            Console.WriteLine($"\nDoes score 500 exist? {hasScore500}");
+
+            //Safely get the player with score 999
+            if (leaderboard.TryGetValue(999, out string player999))
+            {
+                Console.WriteLine($"\nPlayer with score 999: {player999}");
+            }
+            else
+            {
+                Console.WriteLine("\nPlayer with score 999 not found (Safely handled).");
+            }
+
+            //Remove the player with score 200 and print the updated list
+            leaderboard.Remove(200);
+            Console.WriteLine("\nLeaderboard After Removing Score 200 ");
+            foreach (KeyValuePair<int, string> player in leaderboard)
+            {
+                Console.WriteLine($"Score: {player.Key}, Player: {player.Value}");
+            }
+
+
+            #endregion
+
+
             #region  Browser History (Undo)
             // Create a Stack<string> for browser history and Push 5 URLs: "google.com", "github.com", "stackoverflow.com", "youtube.com", "claude.ai"
             Stack<string> browserhistory = new Stack<string>();
